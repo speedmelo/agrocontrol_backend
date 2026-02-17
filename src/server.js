@@ -23,5 +23,8 @@ app.register(import('./routes/auth.js'), { prefix: '/auth' })
 app.register(import('./routes/farms.js'), { prefix: '/farms' })
 
 app.get('/', () => ({ ok: true, name: "AgroControl API" }))
-
+app.get('/', () => ({ ok: true, name: "AgroControl API" }))
+app.get('/me', { preHandler: [app.auth] }, async (req) => {
+  return { user: req.user }
+})
 app.listen({ port: process.env.PORT, host: '0.0.0.0' })
